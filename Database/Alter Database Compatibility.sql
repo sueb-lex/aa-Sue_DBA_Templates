@@ -1,0 +1,48 @@
+
+
+ALTER DATABASE { database_name  | CURRENT }  
+{  
+    MODIFY NAME = new_database_name   
+  | COLLATE collation_name  
+  | <file_and_filegroup_options>  
+  | SET <option_spec> [ ,...n ] [ WITH <termination> ] 
+  | SET COMPATIBILITY_LEVEL = { 140 | 130 | 120 | 110 | 100 | 90 }
+  
+
+ALTER DATABASE database_name   
+SET COMPATIBILITY_LEVEL = { 150 | 140 | 130 | 120 | 110 | 100 | 90 }  
+
+/*
+ALTER DATABASE CURRENT
+SET COMPATIBILITY_LEVEL = 130; --SQL 2016
+*/
+
+
+
+/*
+SELECT name, compatibility_level FROM sys.databases;  
+
+ALTER DATABASE AutoScaleCMRS
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE AutoScaleCMRSAudit
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE AutoScaleRTT
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE RWBackOffice
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE WebRW
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE WM_Addresses_PRD
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE WM_Dumpster_Permitting_PRD
+SET COMPATIBILITY_LEVEL = 130;
+
+ALTER DATABASE WM_Routing_PRD
+SET COMPATIBILITY_LEVEL = 130;
+*/

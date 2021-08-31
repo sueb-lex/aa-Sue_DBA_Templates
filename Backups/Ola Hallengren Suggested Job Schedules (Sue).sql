@@ -1,7 +1,7 @@
 
 /*
 Suggested Backup Schedules for Ola Hallengren Backups
-Last Updated:  12/14/2017
+Last Updated:  05/03/2021
 
 CommandLog Cleanup	     Sunday 12 am
 Output File Cleanup 	Sunday 12 am
@@ -131,14 +131,14 @@ GO
 
 EXEC msdb.dbo.sp_update_job  
     @job_name = N'DatabaseBackup - USER_DATABASES - FULL',  
-    @new_name = N'DatabaseBackup - USER _DATABASES - FULL.Sunday 230 am',  
+    @new_name = N'DatabaseBackup - USER_DATABASES - FULL.Sunday 230 am',  
     @notify_level_email = 2,
     @notify_email_operator_name=N'DBA_Notification'
 GO
 
 --create a job schedule 
 EXEC msdb.dbo.sp_add_jobschedule  
-    @job_name = N'DatabaseBackup - USER _DATABASES - FULL.Sunday 230 am',  
+    @job_name = N'DatabaseBackup - USER_DATABASES - FULL.Sunday 230 am',  
     @name = N'Sunday 230 am',  
     @freq_type = 8,  --once a week
     @freq_interval = 1,  --Sunday

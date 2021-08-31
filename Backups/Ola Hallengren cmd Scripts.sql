@@ -1,3 +1,4 @@
+--LastUpdated  03/15/2021 sb
 
 --CommandLog Cleanup (Sunday 12 am)
 sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d DBA -Q "DELETE FROM  dbo.CommandLog WHERE StartTime < DATEADD(dd,-30,GETDATE())" -b
@@ -15,7 +16,8 @@ EXECUTE DBA.dbo.DatabaseBackup
 @Verify = 'Y',
 @CleanupTime = 144,
 @CheckSum = 'Y',
-@LogToTable = 'Y'
+@LogToTable = 'Y',
+@Compress = 'Y'
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --Backup - USER DATABASES FULL (Sunday 230 am)
 sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d DBA -Q "EXECUTE dbo.DatabaseBackup @Databases = 'USER_DATABASES', @Directory = N'\\prdsqlbus2\sql_data_backup$', @BackupType = 'FULL', @Verify = 'Y', @CleanupTime = 144, @Compress = 'Y', @CheckSum = 'Y', @LogToTable = 'Y'" -b
@@ -27,7 +29,8 @@ EXECUTE DBA.dbo.DatabaseBackup
 @Verify = 'Y',
 @CleanupTime = 144,
 @CheckSum = 'Y',
-@LogToTable = 'Y'
+@LogToTable = 'Y',
+@Compress = 'Y'
 
 /*
 EXAMPLE FROM WEBSITE
@@ -44,7 +47,8 @@ EXECUTE DBA.dbo.DatabaseBackup
 @Verify = 'Y',
 @CleanupTime = 144,
 @CheckSum = 'Y',
-@LogToTable = 'Y'
+@LogToTable = 'Y',
+@Compress = 'Y'
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --Database Integrity Check - SYSTEM DATABASES (Sunday 1215 am)
@@ -100,17 +104,17 @@ You can exclude databases by using syntax like:
 Databases
 Select databases. The keywords SYSTEM_DATABASES, USER_DATABASES, ALL_DATABASES, and AVAILABILITY_GROUP_DATABASES are supported. The hyphen character (-) is used to exclude databases, and the percent character (%) is used for wildcard selection. All of these operations can be combined by using the comma (,).
 Value									  Description
-SYSTEM_DATABASES							  All system databases (master, msdb, and model)
-USER_DATABASES								  All user databases (includes distribution)
-ALL_DATABASES								  All databases
-AVAILABILITY_GROUP_DATABASES					  All databases in availability groups
-USER_DATABASES, -AVAILABILITY_GROUP_DATABASES	  All user databases that are not in availability groups
-Db1										  The database Db1
-Db1, Db2									  The databases Db1 and Db2
-USER_DATABASES, -Db1						  All user databases, except Db1
-%Db%										  All databases that have “Db” in the name
-%Db%, -Db1								  All databases that have “Db” in the name, except Db1
-ALL_DATABASES, -%Db%						  All databases that do not have “Db” in the name
+SYSTEM_DATABASES								All system databases (master, msdb, and model)
+USER_DATABASES									All user databases (includes distribution)
+ALL_DATABASES									All databases
+AVAILABILITY_GROUP_DATABASES					All databases in availability groups
+USER_DATABASES, -AVAILABILITY_GROUP_DATABASES	All user databases that are not in availability groups
+Db1												The database Db1
+Db1, Db2										The databases Db1 and Db2
+USER_DATABASES, -Db1							All user databases, except Db1
+%Db%											All databases that have “Db” in the name (can use single % if needed)
+%Db%, -Db1								  		All databases that have “Db” in the name, except Db1
+ALL_DATABASES, -%Db%							All databases that do not have “Db” in the name
 
 
 Examples
@@ -137,7 +141,7 @@ sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d DBA -Q "EXECUTE [dbo].[DatabaseBackup] @D
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-Script to allow you to run Update Modified Stats for all user databases
+Script to allow you to run Update Modified Stats for all user databases without rebuilding indexes
 https://www.brentozar.com/archive/2016/04/updating-statistics-ola-hallengrens-scripts/
 
 

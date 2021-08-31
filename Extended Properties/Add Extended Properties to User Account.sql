@@ -1,13 +1,41 @@
 --Used to add Extended Properties to a User Account (in a database only)
+--LastUpdated 05/25/2021 sb
 
-EXEC sp_addextendedproperty @name = N'MS_Description', @value = N'used when importing streets into GIS database',
-	@level0type = N'USER',@level0name = N'LEXUCG\PrdSql2019S1Agt$'
-EXEC sp_addextendedproperty @name = N'Developer_Contact', @value = N'Sue Boorman, Chris Doerge',
-	@level0type = N'USER',@level0name = N'LEXUCG\PrdSql2019S1Agt$'
-EXEC sp_addextendedproperty @name = N'DivisionOwner', @value = N'Computer Services',
-	@level0type = N'USER',@level0name = N'LEXUCG\PrdSql2019S1Agt$'
-EXEC sp_addextendedproperty @name = N'LastUpdated', @value = N'01/11/2021 sb',
-	@level0type = N'USER',@level0name = N'LEXUCG\PrdSql2019S1Agt$'
+EXEC sys.sp_addextendedproperty 
+	@name = N'MS_Description', 
+	@value = N'<MS_Description, sysname, Purpose>',
+	@level0type = N'USER',
+	@level0name = N'<user_name, sysname, UserAccount>'
+GO
+
+EXEC sp_addextendedproperty 
+	@name = N'Developer_Contact', 
+	@value = N'<Developer_Contact, sysname,Sue Boorman>',
+	@level0type = N'USER',
+	@level0name = N'<user_name, sysname, UserAccount>'
+GO
+
+EXEC sp_addextendedproperty 
+	@name = N'DivisionOwner', 
+	@value = N'<DivisionOwner, sysname, Computer Services>',
+	@level0type = N'USER',
+	@level0name = N'<user_name, sysname, UserAccount>'
+GO
+
+EXEC sp_addextendedproperty 
+	@name = N'LastUpdated', 
+	@value = N'<LastUpdate, sysname, 03/25/2021 sb>',
+	@level0type = N'USER',
+	@level0name = N'<user_name, sysname, UserAccount>'
+GO
+
+EXEC sp_addextendedproperty 
+	@name = N'Notes', 
+	@value = N'<Notes, sysname, Enter Additional Info>',
+	@level0type = N'USER',
+	@level0name = N'<user_name, sysname, UserAccount>'
+GO
+
 
 /*
 --used to select extended properties from a single database (must be pointed to this database)
@@ -74,4 +102,5 @@ EXEC sp_dropextendedproperty
 
 
 */
+
 GO
